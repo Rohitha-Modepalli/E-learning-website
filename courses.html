@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: navy;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            border-style: solid;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+            margin: 10px auto;
+            max-width: 800px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .course-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .course-item {
+            background-color: teal;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            width: 45%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .course-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: green;
+            color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: navy;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: navy;
+            color: #ffffff;
+            border-radius: 10px;
+            height: 40px;
+            width: 150px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button1:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to LearnHub Courses</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="registration.html">Sign Up</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="aboutme.html">AboutMe</a></li>
+            <li><a href="about us.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="courses" class="col-12 col-sm-4 col-md-3">
+        <h2>Courses</h2>
+        <div id="course-list" class="course-list"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 LearnHub. All rights reserved.</p>
+    </footer>
+
+    <div id="course-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const courses = [
+                { id: 1, name: 'HTML for Beginners', description: 'Learn the basics of HTML.', details: 'This course covers all the basics of HTML, including tags, attributes, and elements.' },
+                { id: 2, name: 'CSS Fundamentals', description: 'Learn how to style web pages with CSS.', details: 'This course covers CSS syntax, selectors, properties, and how to create responsive designs.' },
+                { id: 3, name: 'Build Your Own Responsive Website', description: 'Build Your Website that appears Beautiful', details: 'Build a responsive website that appears beautifully on any screen size. Develop a food munch website, an E-commerce product listing website for small business owners using bootstrap fundamental concepts. Use tools and technologies such as HTML, CSS, and Bootstrap.' },
+                { id: 4, name: 'Python Foundations', description: 'Learning to code is useful no matter what your career ambitions are.', details: 'Learning to code is useful no matter what your career ambitions are. In this course, we demystify programming. You will learn the fundamental concepts of programming, write code in Python, and solve challenging coding questions for practice along the way.' },
+                { id: 5, name: 'JavaScript', description: 'Build Your Own Dynamic Web Application', details: 'In this course, you will understand the fundamental concepts in JavaScript and apply them to build dynamic and interactive web applications like Todos Application, Counter, Bomb defuser, Chatbot Web app, Wikipedia Search Application, etc.' },
+                { id: 6, name: 'SQL', description: 'Introduction to Databases.', details: 'Learn about the incredibly prevalent databases today. Through this course, you will develop strong fundamentals and be proficient in concepts related to Databases and DBMS. Most importantly, you will also be able to perform powerful queries on databases using SQL.' },
+                { id: 7, name: 'JavaScript Essentials', description: 'Learn the fundamentals of JavaScript.', details: 'This course covers variables, functions, events, and the basics of DOM manipulation.' },
+                { id: 8, name: 'Responsive Web Design using Flexbox', description: 'Learn the fundamentals of Flexbox for responsive web design.', details: 'This course covers Flexbox layout techniques and how to create responsive web designs.' },
+                { id: 9, name: 'Developer Foundation', description: 'Learn the essentials of Operating Systems, Networks, and tools like Command-Line and Git.', details: 'You will learn the essentials of Operating Systems, Networks, and use tools like Command-Line and Git to become a better developer. You will learn to version your software with Git and push your code to GitHub.' },
+                { id: 10, name: 'Node JS', description: 'Learn how to build a backend web application using Node.js and Express.', details: 'In this course, you will learn how to build a backend web application using one of the most popular and mature JavaScript web development frameworks, Express. This course covers various aspects of web application development like database, routing, URLs, etc.' },
+                { id: 11, name: 'React JS', description: 'Learn how to build dynamic web applications with the React JS library.', details: 'You will learn how to build dynamic web applications with the React JS library. By the end of this course, you will be comfortable creating a modern, clean, and maintainable application in React JS from scratch.' }
+            ];
+
+            const courseList = document.getElementById('course-list');
+            const modal = document.getElementById('course-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const closeModal = document.getElementsByClassName('close')[0];
+
+            courses.forEach(course => {
+                const courseItem = document.createElement('div');
+                courseItem.classList.add('course-item');
+                courseItem.innerHTML = `
+                    <h3>${course.name}</h3>
+                    <p>${course.description}</p>
+                `;
+                courseItem.addEventListener('click', () => {
+                    modalTitle.textContent = course.name;
+                    modalDescription.textContent = course.details;
+                    modal.style.display = 'block';
+                });
+                courseList.appendChild(courseItem);
+            });
+
+            closeModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
